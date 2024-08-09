@@ -82,6 +82,7 @@ exports.isUserAuthenticated = catchAsync(async (req, res, next) => {
     process.env.JWT_SECRET
   );
 
+  console.log(token)
 
   // 3) Check if user still exists
   const currentUser = await Users.findById(verification.id);

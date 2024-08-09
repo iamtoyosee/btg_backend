@@ -14,18 +14,17 @@ const app = express()
 //express.json allows incoming request to be parsed before it gets processed by our server
 app.use(express.json())
 //the cors library helps us avoid cors error by ensuring appropriate cors header are added to our request headers
-app.use(cors())
+app.use(
+  cors({
+    allowedHeaders: ["authorization", "Content-Type"], // you can change the headers
+    exposedHeaders: ["authorization"], // you can change the headers
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false
+  })
+)
 
 
-
-const corsOptions = {
-  origin: 'http://localhost:3000', // Allow your frontend domain
-  methods: '*', // Allow these HTTP methods
-  allowedHeaders: '*', // Allow these custom headers
-  credentials: true, // Allow cookies if needed
-};
-
-app.use(cors(corsOptions));
 
 
 app.use('/auth', userRoutes)
